@@ -1,0 +1,11 @@
+peripheral.call("bottom", "transmit", 5,5, "request")
+modem.open(5)
+p1, p2, p3, p4, p5 = os.pullEvent("modem_message")
+local coors = p5
+cfile = fs.open("data/destination.lua","w")
+cfile.write(textutils.serialise(coors))
+cfile.close()
+cfile = fs.open("data/task.lua","w")
+cfile.write("move.lua")
+cfile.close()
+shell.run("startup")

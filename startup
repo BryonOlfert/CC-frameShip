@@ -1,0 +1,16 @@
+while true do
+    local modem = peripheral.wrap("bottom")
+    local cfile = fs.open("data/task.lua", "r")
+    local task = cfile.readAll()
+    cfile.close()
+    if task == "idle.lua" then
+        modem.open(5)
+        p1, p2, p3, p4, p5 = os.pullEvent("modem_message")
+        local task = p5
+        cfile = fs.open("data/task.lua","w")
+        cfile.write("move.lua")
+        cfile.close()
+        task = "move.lua"
+    end
+    shell.run("programs/" .. task)
+end

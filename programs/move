@@ -1,5 +1,5 @@
-local x, y, z = gps.locate() -- gps position from gps server
-local cfile = fs.open("data/destination.lua","r") -- gets target destination from 'destination' file
+x, z, y = gps.locate() -- gps position from gps server
+local cfile = fs.open("data/destination","r") -- gets target destination from 'destination' file
 local direction = "string" -- This creates a variable to store direction of travel for carriage controller
 local targetCoors = {} -- table for storing destination coordinates
 targetCoors = textutils.unserialize(cfile.readAll())
@@ -25,8 +25,8 @@ elseif y ~= targetCoors[2] then
         direction = "up"
     end
 else
-    cfile = fs.open("data/task.lua","w")
-    cfile.write("idle.lua")
+    cfile = fs.open("data/task","w")
+    cfile.write("idle")
     cfile.close()
 end
-peripheral.call("back","move",direction,false,false)
+peripheral.call("left","move",direction,false,false)

@@ -1,0 +1,3 @@
+cfile = fs.open("data/task.lua","w")
+cfile.write("idle.lua")
+cfile.close()
